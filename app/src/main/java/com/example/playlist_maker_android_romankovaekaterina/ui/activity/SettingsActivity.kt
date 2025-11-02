@@ -82,7 +82,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                     .fillMaxWidth()
                     .clickable {
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                            Intent.setType = "text/plain"
+                            type = "text/plain"
                         }
                         val chooser = Intent.createChooser(
                             shareIntent,
