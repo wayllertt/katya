@@ -1,41 +1,33 @@
-package com.example.playlist_maker_android_romankovaekaterina
+package com.example.playlist_maker_android_romankovaekaterina.ui.activity
 
 import android.content.Intent
-import android.widget.Toast
 import android.os.Bundle
-
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.unit.dp
-
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
-
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.playlist_maker_android_romankovaekaterina.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,33 +46,36 @@ class MainActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color(0xFFF9F9F9))
-        ) { Box(
-            modifier = Modifier
-                .background(Color(0xFF3D6EFF), RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp))
-                .padding(vertical = 30.dp, horizontal = 16.dp)
-                .fillMaxWidth()
-        )
-        {
-            Text(
-                text = stringResource(id = R.string.playlist_maker),
-                color = Color.White,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(
+                        Color(0xFF3D6EFF),
+                        RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
+                    )
+                    .padding(vertical = 30.dp, horizontal = 16.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.playlist_maker),
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
             Spacer(modifier = Modifier.height(10.dp))
-            DrawerItem(icon = Icons.Default.Search, stringResource(id = R.string.search)) {
-                val intent = Intent(context, Search_Activity::class.java)
+            DrawerItem(icon = Icons.Default.Search, text = stringResource(id = R.string.search)) {
+                val intent = Intent(context, SearchActivity::class.java)
                 context.startActivity(intent)
             }
-            DrawerItem(icon = Icons.Default.PlayArrow, stringResource(id = R.string.playlists)) {
-                Toast.makeText(context, "Кнопка нажата", Toast.LENGTH_SHORT).show()
+            DrawerItem(icon = Icons.Default.PlayArrow, text = stringResource(id = R.string.playlists)) {
+                Toast.makeText(context, R.string.button_clicked, Toast.LENGTH_SHORT).show()
             }
-            DrawerItem(icon = Icons.Default.FavoriteBorder, stringResource(id = R.string.favorites)) {
-                Toast.makeText(context, "Кнопка нажата", Toast.LENGTH_SHORT).show()
+            DrawerItem(icon = Icons.Default.FavoriteBorder, text = stringResource(id = R.string.favorites)) {
+                Toast.makeText(context, R.string.button_clicked, Toast.LENGTH_SHORT).show()
             }
-            DrawerItem(icon = Icons.Default.Settings, stringResource(id = R.string.settings)) {
-                val intent = Intent(context, Settings_Activity::class.java)
+            DrawerItem(icon = Icons.Default.Settings, text = stringResource(id = R.string.settings)) {
+                val intent = Intent(context, SettingsActivity::class.java)
                 context.startActivity(intent)
             }
         }
@@ -91,8 +86,7 @@ class MainActivity : ComponentActivity() {
         icon: ImageVector,
         text: String,
         onClick: (() -> Unit)? = null
-    )
-    {
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
