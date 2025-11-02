@@ -58,13 +58,28 @@ class Storage {
     )
 
     fun search(request: String): List<TrackDto> {
+        val normalizedTokens = request
+            .normalizeForSearch()
+            .split(whitespaceRegex)
+            .filter { it.isNotEmpty() }
+
+        if (normalizedTokens.isEmpty()) return emptyList()
         return listTracks.filter { track ->
-            track.trackName.lowercase().contains(request.lowercase())
+            val searchableText = listOf(track.trackName, track.artistName)
+                .joinToString(separator = " ")
+                .normalizeForSearch()
+
+            normalizedTokens.all(searchableText::contains)
         }
     }
 
     private fun String.normalizeForSearch(): String =
         lowercase(Locale.getDefault())
             .replace('ё', 'е')
+            .replace(whitespaceRegex, " ")
             .trim()
+
+    private companion object {
+        val whitespaceRegex = "\\s+".toRegex()
+    }
 }

@@ -8,8 +8,8 @@ import androidx.navigation.compose.NavHost
 import com.example.playlist_maker_android_romankovaekaterina.ui.activity.FavoritesScreen
 import com.example.playlist_maker_android_romankovaekaterina.ui.activity.MainScreen
 import com.example.playlist_maker_android_romankovaekaterina.ui.activity.PlaylistsScreen
-import com.example.playlist_maker_android_romankovaekaterina.ui.activity.SearchScreen
 import com.example.playlist_maker_android_romankovaekaterina.ui.activity.SettingsScreen
+import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchRoute
 
 @Composable
 fun PlaylistHost(navController: NavHostController) {
@@ -30,7 +30,7 @@ fun PlaylistHost(navController: NavHostController) {
             )
         }
         composable(AppScreen.Search.route) {
-            SearchScreen(onBack = navigateUp)
+            SearchRoute(onBack = navigateUp)
         }
         composable(AppScreen.Settings.route) {
             SettingsScreen(onBack = navigateUp)
