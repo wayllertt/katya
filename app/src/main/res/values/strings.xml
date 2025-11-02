@@ -15,4 +15,14 @@
     <string name="share_chooser_title">Поделиться через...</string>
     <string name="dev_email_body">Спасибо!</string>
     <string name="offer_url">https://practicum.yandex.ru/legal/offer/</string>
+
+    <string name="search_title">Поиск</string>
+    <string name="placeholder">Поиск</string>
+    <string name="loading">Идёт поиск…</string>
+    <string name="error_empty">Ничего не найдено</string>
+    <string name="error_network">Произошла ошибка. Попробуйте ещё раз</string>
+    <string name="track_selected">Трек «%1$s» выбран</string>
+    <string name="description_back">Назад</string>
+    <string name="description_search">Начать поиск</string>
+    <string name="description_clear">Очистить запрос</string>
 </resources>

@@ -31,10 +31,9 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
-import com.example.playlist_maker_android_romankovaekaterina.PlaylistHost
+import com.example.playlist_maker_android_romankovaekaterina.ui.navigation.PlaylistHost
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,9 +47,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(
     onOpenSearch: () -> Unit,
-    onOpenSettings: () -> Unit
+    onOpenPlaylists: () -> Unit,
+    onOpenFavorites: () -> Unit,
+    onOpenSettings: () -> Unit,
 ) {
-    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -64,10 +64,11 @@ fun MainScreen(
             onOpenSearch()
         }
         MenuRow(icon = Icons.Default.PlayArrow, text = stringResource(R.string.playlists)) {
-            Toast.makeText(context, "Кнопка нажата", Toast.LENGTH_SHORT).show()
+            onOpenPlaylists()
         }
         MenuRow(icon = Icons.Default.FavoriteBorder, text = stringResource(R.string.favorites)) {
-            Toast.makeText(context, "Кнопка нажата", Toast.LENGTH_SHORT).show()}
+            onOpenFavorites()
+        }
         MenuRow(icon = Icons.Default.Settings, text = stringResource(R.string.settings_title)) {
             onOpenSettings()
         }

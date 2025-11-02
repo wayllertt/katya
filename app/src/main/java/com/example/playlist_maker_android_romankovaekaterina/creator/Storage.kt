@@ -1,6 +1,7 @@
 package com.example.playlist_maker_android_romankovaekaterina.creator
 
 import com.example.playlist_maker_android_romankovaekaterina.data.dto.TrackDto
+import java.util.Locale
 
 class Storage {
     private val listTracks = listOf(
@@ -61,4 +62,9 @@ class Storage {
             track.trackName.lowercase().contains(request.lowercase())
         }
     }
+
+    private fun String.normalizeForSearch(): String =
+        lowercase(Locale.getDefault())
+            .replace('ё', 'е')
+            .trim()
 }
