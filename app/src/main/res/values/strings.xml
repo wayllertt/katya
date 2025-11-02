@@ -2,8 +2,17 @@
     <string name="app_name">playlist-maker-android-RomankovaEkaterina</string>
 
     <string name="playlist_maker">Playlist Maker</string>
-    <string name="settings">Настройки</string>
+    <string name="settings_title">Настройки</string>
     <string name="search">Поиск</string>
     <string name="playlists">Плейлисты</string>
     <string name="favorites">Избранное</string>
+
+    <string name="btn_share_app">Поделиться приложением</string>
+    <string name="btn_write_to_devs">Написать в поддержку</string>
+    <string name="dev_email_to">romankowa.ekaterina@yandex.ru</string>
+    <string name="dev_email_subject">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
+    <string name="btn_user_agreement">Пользовательское соглашение</string>
+    <string name="share_chooser_title">Поделиться через...</string>
+    <string name="dev_email_body">Спасибо!</string>
+    <string name="offer_url">https://practicum.yandex.ru/legal/offer/</string>
 </resources>

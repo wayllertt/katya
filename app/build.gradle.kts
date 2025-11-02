@@ -33,6 +33,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.7.0"
+    }
     kotlinOptions {
         jvmTarget = "11"
     }
@@ -51,6 +54,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.ui)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.foundation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -63,6 +68,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("androidx.activity:activity-compose")
+    implementation("androidx.navigation:navigation-compose:2.8.0")
+    implementation("androidx.compose.foundation:foundation:1.7.0")
 }
