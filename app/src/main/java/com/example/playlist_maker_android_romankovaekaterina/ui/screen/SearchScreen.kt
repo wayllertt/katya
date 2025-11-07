@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -50,6 +51,9 @@ import com.example.playlist_maker_android_romankovaekaterina.domain.models.Track
 import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchError
 import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchState
 import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchViewModel
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.integerResource
 
 @Composable
 fun SearchRoute(
@@ -101,9 +105,10 @@ fun SearchScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = dimensionResource(R.dimen.search_screen_horizontal_padding)),
         ) {
-            Spacer(modifier = Modifier.height(16.dp))
+
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.search_screen_top_spacing)))
 
             OutlinedTextField(
                 value = searchQuery,
@@ -140,7 +145,7 @@ fun SearchScreen(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(dimensionResource(R.dimen.search_screen_field_corner_radius)),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = fieldColor,
                     unfocusedContainerColor = fieldColor,
@@ -153,7 +158,7 @@ fun SearchScreen(
                 ),
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.search_screen_content_spacing)))
 
             when (state) {
                 SearchState.Initial -> Unit
@@ -161,11 +166,11 @@ fun SearchScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 32.dp),
+                            .padding(top = dimensionResource(R.dimen.search_screen_status_top_padding)),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         CircularProgressIndicator()
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.search_screen_loading_spacing)))
                         Text(text = stringResource(id = R.string.loading))
                     }
                 }
@@ -178,7 +183,7 @@ fun SearchScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 32.dp),
+                            .padding(top = dimensionResource(R.dimen.search_screen_status_top_padding)),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(text = stringResource(id = message))
@@ -188,8 +193,12 @@ fun SearchScreen(
                 is SearchState.Success -> {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(bottom = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        contentPadding = PaddingValues(
+                            bottom = dimensionResource(R.dimen.search_screen_list_bottom_padding)
+                        ),
+                        verticalArrangement = Arrangement.spacedBy(
+                            dimensionResource(R.dimen.search_screen_list_item_spacing)
+                        ),
                     ) {
                         items(state.tracks) { track ->
                             TrackRow(
@@ -220,16 +229,21 @@ private fun TrackRow(
             .fillMaxWidth()
             .background(
                 color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(
+                    dimensionResource(R.dimen.search_screen_track_corner_radius)
+                ),
             )
             .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(
+                horizontal = dimensionResource(R.dimen.search_screen_track_padding_horizontal),
+                vertical = dimensionResource(R.dimen.search_screen_track_padding_vertical)
+            ),
     ) {
         RowWithTime(
             title = track.trackName,
             time = track.trackTime,
         )
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.search_screen_track_spacing)))
         Text(
             text = track.artistName,
             style = MaterialTheme.typography.bodyMedium,

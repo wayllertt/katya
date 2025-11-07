@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_screen_content_spacing">10dp</dimen>
+    <dimen name="main_screen_header_padding_horizontal">16dp</dimen>
+    <dimen name="main_screen_header_padding_vertical">30dp</dimen>
+    <dimen name="main_screen_header_corner_radius">12dp</dimen>
+    <dimen name="main_screen_menu_item_padding_horizontal">16dp</dimen>
+    <dimen name="main_screen_menu_item_padding_vertical">16dp</dimen>
+    <dimen name="main_screen_menu_icon_size">30dp</dimen>
+    <dimen name="main_screen_menu_icon_spacing">20dp</dimen>
+
+    <dimen name="search_screen_horizontal_padding">16dp</dimen>
+    <dimen name="search_screen_top_spacing">16dp</dimen>
+    <dimen name="search_screen_field_corner_radius">12dp</dimen>
+    <dimen name="search_screen_content_spacing">24dp</dimen>
+    <dimen name="search_screen_status_top_padding">32dp</dimen>
+    <dimen name="search_screen_loading_spacing">16dp</dimen>
+    <dimen name="search_screen_list_bottom_padding">16dp</dimen>
+    <dimen name="search_screen_list_item_spacing">12dp</dimen>
+    <dimen name="search_screen_track_corner_radius">12dp</dimen>
+    <dimen name="search_screen_track_padding_horizontal">16dp</dimen>
+    <dimen name="search_screen_track_padding_vertical">12dp</dimen>
+    <dimen name="search_screen_track_spacing">4dp</dimen>
+
+    <dimen name="settings_screen_row_padding_horizontal">16dp</dimen>
+    <dimen name="settings_screen_row_padding_vertical">18dp</dimen>
+    <dimen name="settings_screen_section_spacing">2dp</dimen>
+</resources>

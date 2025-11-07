@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="main_screen_header_text_size">20</integer>
+    <integer name="main_screen_menu_text_size">20</integer>
+    <integer name="settings_text_size">16</integer>
+</resources>

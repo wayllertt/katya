@@ -31,6 +31,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.playlist_maker_android_romankovaekaterina.R
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.integerResource
 
 @Composable
 fun MainScreen(
@@ -40,13 +43,18 @@ fun MainScreen(
     onOpenSettings: () -> Unit,
 ) {
 
+    val screenBackground = colorResource(R.color.main_screen_background)
+    val contentSpacing = dimensionResource(R.dimen.main_screen_content_spacing)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF9F9F9))
+            .background(screenBackground)
+
     ) {
         Header(title = stringResource(id = R.string.playlist_maker))
-        Spacer(Modifier.height(10.dp))
+
+        Spacer(Modifier.height(contentSpacing))
 
         MenuRow(icon = Icons.Default.Search, text = stringResource(R.string.search)) {
             onOpenSearch()
@@ -65,19 +73,30 @@ fun MainScreen(
 
 @Composable
 private fun Header(title: String) {
+
+    val headerBackground = colorResource(R.color.main_screen_header_background)
+    val headerHorizontalPadding = dimensionResource(R.dimen.main_screen_header_padding_horizontal)
+    val headerVerticalPadding = dimensionResource(R.dimen.main_screen_header_padding_vertical)
+    val headerCornerRadius = dimensionResource(R.dimen.main_screen_header_corner_radius)
+    val headerTextColor = colorResource(R.color.white)
+    val headerTextSize = integerResource(R.integer.main_screen_header_text_size).sp
+
     Box(
         modifier = Modifier
             .background(
-                color = Color(0xFF3D6EFF),
-                shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
+                color = headerBackground,
+                shape = RoundedCornerShape(
+                    bottomStart = headerCornerRadius,
+                    bottomEnd = headerCornerRadius
+                )
             )
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 30.dp)
+            .padding(horizontal = headerHorizontalPadding, vertical = headerVerticalPadding)
     ) {
         Text(
             text = title,
-            color = Color.White,
-            fontSize = 20.sp,
+            color = headerTextColor,
+            fontSize = headerTextSize,
             fontWeight = FontWeight.Bold
         )
     }
@@ -90,27 +109,35 @@ fun MenuRow(
     onClick: (() -> Unit)? = null
 ) {
     val click = rememberUpdatedState(newValue = onClick)
+    val itemHorizontalPadding = dimensionResource(R.dimen.main_screen_menu_item_padding_horizontal)
+    val itemVerticalPadding = dimensionResource(R.dimen.main_screen_menu_item_padding_vertical)
+    val iconTint = colorResource(R.color.main_screen_menu_icon_tint)
+    val iconSize = dimensionResource(R.dimen.main_screen_menu_icon_size)
+    val textSpacing = dimensionResource(R.dimen.main_screen_menu_icon_spacing)
+    val textColor = colorResource(R.color.main_screen_menu_text_color)
+    val textSize = integerResource(R.integer.main_screen_menu_text_size).sp
+
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { click.value?.invoke() }
-            .padding(horizontal = 16.dp, vertical = 16.dp),
+            .padding(horizontal = itemHorizontalPadding, vertical = itemVerticalPadding),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = Color.Black.copy(alpha = 0.85f),
-            modifier = Modifier.size(30.dp)
+            tint = iconTint,
+            modifier = Modifier.size(iconSize)
         )
 
         Spacer(Modifier.width(20.dp))
 
         Text(
             text = text,
-            color = Color.Black.copy(alpha = 0.9f),
-            fontSize = 20.sp,
+            color = textColor,
+            fontSize = textSize,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.weight(1f)
         )
