@@ -5,11 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.example.playlist_maker_android_romankovaekaterina.ui.activity.FavoritesScreen
+import com.example.playlist_maker_android_romankovaekaterina.ui.screen.FavoritesScreen
 import com.example.playlist_maker_android_romankovaekaterina.ui.activity.MainScreen
-import com.example.playlist_maker_android_romankovaekaterina.ui.activity.PlaylistsScreen
-import com.example.playlist_maker_android_romankovaekaterina.ui.activity.SettingsScreen
-import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchRoute
+import com.example.playlist_maker_android_romankovaekaterina.ui.screen.PlaylistsScreen
+import com.example.playlist_maker_android_romankovaekaterina.ui.screen.SettingsScreen
+import com.example.playlist_maker_android_romankovaekaterina.ui.screen.SearchRoute
 
 @Composable
 fun PlaylistHost(navController: NavHostController) {
