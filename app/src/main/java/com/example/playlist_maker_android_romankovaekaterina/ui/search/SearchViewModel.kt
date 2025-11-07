@@ -27,7 +27,9 @@ class SearchViewModel(
         viewModelScope.launch {
             _state.value = SearchState.Searching
             val result = withContext(Dispatchers.IO) {
-                runCatching { repository.searchTracks(query) }
+                runCatching {
+                    repository.searchTracks(query)
+                }
             }
 
             result.fold(

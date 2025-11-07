@@ -1,4 +1,4 @@
-package com.example.playlist_maker_android_romankovaekaterina.ui.search
+package com.example.playlist_maker_android_romankovaekaterina.ui.screen
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -47,6 +47,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.playlist_maker_android_romankovaekaterina.R
 import com.example.playlist_maker_android_romankovaekaterina.creator.Creator
 import com.example.playlist_maker_android_romankovaekaterina.domain.models.Track
+import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchError
+import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchState
+import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchViewModel
 
 @Composable
 fun SearchRoute(
