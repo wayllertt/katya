@@ -29,6 +29,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +55,7 @@ import com.example.playlist_maker_android_romankovaekaterina.ui.search.SearchVie
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.text.TextStyle
 
 @Composable
 fun SearchRoute(
@@ -80,6 +82,8 @@ fun SearchScreen(
     var searchQuery by rememberSaveable { mutableStateOf("") }
     val fieldColor = MaterialTheme.colorScheme.surfaceVariant
     val context = LocalContext.current
+    val backgroundColor = colorResource(R.color.white)
+    val textColor = colorResource(R.color.black)
 
     Scaffold(
         topBar = {
@@ -88,6 +92,7 @@ fun SearchScreen(
                     Text(
                         text = stringResource(id = R.string.search_title),
                         fontWeight = FontWeight.Medium,
+                        color = textColor,
                     )
                 },
                 navigationIcon = {
@@ -95,16 +100,24 @@ fun SearchScreen(
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.description_back),
+                            tint = textColor,
                         )
                     }
                 },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = backgroundColor,
+                    titleContentColor = textColor,
+                    navigationIconContentColor = textColor,
+                ),
             )
         },
+        containerColor = backgroundColor,
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
+                .background(backgroundColor)
                 .padding(horizontal = dimensionResource(R.dimen.search_screen_horizontal_padding)),
         ) {
 
@@ -118,7 +131,12 @@ fun SearchScreen(
                         onReset()
                     }
                 },
-                placeholder = { Text(text = stringResource(id = R.string.placeholder)) },
+                placeholder = {
+                    Text(
+                        text = stringResource(id = R.string.placeholder),
+                        color = textColor,
+                    )
+                },
                 leadingIcon = {
                     IconButton(
                         onClick = { onSearch(searchQuery) },
@@ -127,6 +145,7 @@ fun SearchScreen(
                         Icon(
                             imageVector = Icons.Filled.Search,
                             contentDescription = stringResource(id = R.string.description_search),
+                            tint = textColor,
                         )
                     }
                 },
@@ -139,6 +158,7 @@ fun SearchScreen(
                             Icon(
                                 imageVector = Icons.Filled.Clear,
                                 contentDescription = stringResource(id = R.string.description_clear),
+                                tint = textColor,
                             )
                         }
                     }
@@ -156,6 +176,7 @@ fun SearchScreen(
                     disabledBorderColor = Color.Transparent,
                     errorBorderColor = Color.Transparent,
                 ),
+                textStyle = TextStyle(color = textColor),
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.search_screen_content_spacing)))
@@ -171,7 +192,10 @@ fun SearchScreen(
                     ) {
                         CircularProgressIndicator()
                         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.search_screen_loading_spacing)))
-                        Text(text = stringResource(id = R.string.loading))
+                        Text(
+                            text = stringResource(id = R.string.loading),
+                            color = textColor,
+                        )
                     }
                 }
 
@@ -186,7 +210,10 @@ fun SearchScreen(
                             .padding(top = dimensionResource(R.dimen.search_screen_status_top_padding)),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Text(text = stringResource(id = message))
+                        Text(
+                            text = stringResource(id = message),
+                            color = textColor,
+                        )
                     }
                 }
 
@@ -224,11 +251,13 @@ private fun TrackRow(
     track: Track,
     onClick: () -> Unit,
 ) {
+    val backgroundColor = colorResource(R.color.white)
+    val textColor = colorResource(R.color.black)
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.surface,
+                color = backgroundColor,
                 shape = RoundedCornerShape(
                     dimensionResource(R.dimen.search_screen_track_corner_radius)
                 ),
@@ -242,12 +271,13 @@ private fun TrackRow(
         RowWithTime(
             title = track.trackName,
             time = track.trackTime,
+            textColor = textColor,
         )
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.search_screen_track_spacing)))
         Text(
             text = track.artistName,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = textColor,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
@@ -258,6 +288,7 @@ private fun TrackRow(
 private fun RowWithTime(
     title: String,
     time: String,
+    textColor: Color,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -266,7 +297,7 @@ private fun RowWithTime(
         Text(
             text = title,
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = textColor,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f),
@@ -274,7 +305,7 @@ private fun RowWithTime(
         Text(
             text = time,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
+            color = textColor,
         )
     }
 }

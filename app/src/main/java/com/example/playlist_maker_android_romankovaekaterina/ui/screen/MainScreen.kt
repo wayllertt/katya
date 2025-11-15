@@ -43,7 +43,7 @@ fun MainScreen(
     onOpenSettings: () -> Unit,
 ) {
 
-    val screenBackground = colorResource(R.color.main_screen_background)
+    val screenBackground = colorResource(R.color.background)
     val contentSpacing = dimensionResource(R.dimen.main_screen_content_spacing)
 
     Column(
@@ -68,6 +68,11 @@ fun MainScreen(
         MenuRow(icon = Icons.Default.Settings, text = stringResource(R.string.settings_title)) {
             onOpenSettings()
         }
+
+
+
+
+
     }
 }
 

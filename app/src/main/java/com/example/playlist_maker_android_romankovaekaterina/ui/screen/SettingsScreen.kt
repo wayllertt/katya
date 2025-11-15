@@ -2,6 +2,7 @@ package com.example.playlist_maker_android_romankovaekaterina.ui.screen
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,31 +45,42 @@ fun SettingsScreen(onBack: () -> Unit) {
     val emailBody = stringResource(R.string.dev_email_body)
     val offerUrl = stringResource(R.string.offer_url)
 
+    val backgroundColor = colorResource(R.color.white)
+    val textColor = colorResource(R.color.black)
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
                         text = stringResource(R.string.settings_title),
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = textColor,
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.description_back)
+                            contentDescription = stringResource(R.string.description_back),
+                            tint = textColor,
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = backgroundColor,
+                    titleContentColor = textColor,
+                    navigationIconContentColor = textColor,
+                ),
             )
         },
-        containerColor = colorResource(R.color.white)
+        containerColor = backgroundColor,
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
+                .background(backgroundColor),
         ) {
             val rowHorizontalPadding = dimensionResource(R.dimen.settings_screen_row_padding_horizontal)
             val rowVerticalPadding = dimensionResource(R.dimen.settings_screen_row_padding_vertical)
@@ -93,11 +106,13 @@ fun SettingsScreen(onBack: () -> Unit) {
                 Text(
                     text = stringResource(R.string.btn_share_app),
                     fontSize = textSize,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    color = textColor,
                 )
                 Icon(
                     imageVector = Icons.Filled.Share,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = textColor,
                 )
             }
 
@@ -122,11 +137,13 @@ fun SettingsScreen(onBack: () -> Unit) {
                 Text(
                     text = stringResource(R.string.btn_write_to_devs),
                     fontSize = textSize,
+                    color = textColor,
                     modifier = Modifier.weight(1f)
                 )
                 Icon(
                     imageVector = Icons.Filled.Email,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = textColor,
                 )
             }
 
@@ -145,11 +162,13 @@ fun SettingsScreen(onBack: () -> Unit) {
                 Text(
                     text = stringResource(R.string.btn_user_agreement),
                     fontSize = textSize,
+                    color = textColor,
                     modifier = Modifier.weight(1f)
                 )
                 Icon(
                     imageVector = Icons.Filled.ArrowForward,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = textColor,
                 )
             }
 
