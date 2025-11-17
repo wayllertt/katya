@@ -14,27 +14,39 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.playlist_maker_android_romankovaekaterina.R
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.integerResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.playlist_maker_android_romankovaekaterina.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     onOpenSearch: () -> Unit,
@@ -45,34 +57,56 @@ fun MainScreen(
 
     val screenBackground = colorResource(R.color.background)
     val contentSpacing = dimensionResource(R.dimen.main_screen_content_spacing)
+    var isBottomSheetVisible by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(screenBackground)
-
-    ) {
-        Header(title = stringResource(id = R.string.playlist_maker))
-
-        Spacer(Modifier.height(contentSpacing))
-
-        MenuRow(icon = Icons.Default.Search, text = stringResource(R.string.search)) {
-            onOpenSearch()
+    if (isBottomSheetVisible) {
+        ModalBottomSheet(
+            onDismissRequest = { isBottomSheetVisible = false }
+        ) {
+            MainScreenBottomSheetContent(
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 32.dp)
+            )
         }
-        MenuRow(icon = Icons.Default.PlayArrow, text = stringResource(R.string.playlists)) {
-            onOpenPlaylists()
+    }
+
+    Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { isBottomSheetVisible = true },
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(R.string.main_fab_description)
+                )
+            }
         }
-        MenuRow(icon = Icons.Default.FavoriteBorder, text = stringResource(R.string.favorites)) {
-            onOpenFavorites()
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(screenBackground)
+                .padding(innerPadding)
+
+        ) {
+            Header(title = stringResource(id = R.string.playlist_maker))
+
+            Spacer(Modifier.height(contentSpacing))
+
+            MenuRow(icon = Icons.Default.Search, text = stringResource(R.string.search)) {
+                onOpenSearch()
+            }
+            MenuRow(icon = Icons.Default.PlayArrow, text = stringResource(R.string.playlists)) {
+                onOpenPlaylists()
+            }
+            MenuRow(icon = Icons.Default.FavoriteBorder, text = stringResource(R.string.favorites)) {
+                onOpenFavorites()
+            }
+            MenuRow(icon = Icons.Default.Settings, text = stringResource(R.string.settings_title)) {
+                onOpenSettings()
+            }
         }
-        MenuRow(icon = Icons.Default.Settings, text = stringResource(R.string.settings_title)) {
-            onOpenSettings()
-        }
-
-
-
-
-
     }
 }
 
@@ -145,6 +179,30 @@ fun MenuRow(
             fontSize = textSize,
             fontWeight = FontWeight.Medium,
             modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
+private fun MainScreenBottomSheetContent(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(R.string.main_bottom_sheet_title),
+            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = stringResource(R.string.main_bottom_sheet_message),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center
         )
     }
 }

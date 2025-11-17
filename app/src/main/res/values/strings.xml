@@ -27,4 +27,14 @@
     <string name="description_back">Назад</string>
     <string name="description_search">Начать поиск</string>
     <string name="description_clear">Очистить запрос</string>
+
+    <string name="main_fab_description">Показать подсказку</string>
+    <string name="main_bottom_sheet_title">Панель действий</string>
+    <string name="main_bottom_sheet_message">Здесь появится содержимое панели ModalBottomSheet. Закройте её, нажав вне области панели.</string>
+
+    <string name="playlists_fab_description">Создать плейлист</string>
+    <string name="playlists_empty_state_title">Пока нет плейлистов</string>
+    <string name="playlists_empty_state_description">Нажмите на кнопку, чтобы добавить первый плейлист</string>
+    <string name="playlists_bottom_sheet_title">Новый плейлист</string>
+    <string name="playlists_bottom_sheet_message">Закройте панель, нажав вне её области</string>
 </resources>
