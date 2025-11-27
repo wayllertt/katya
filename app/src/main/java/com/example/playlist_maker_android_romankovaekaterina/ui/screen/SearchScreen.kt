@@ -60,6 +60,7 @@ import androidx.compose.ui.text.TextStyle
 @Composable
 fun SearchRoute(
     onBack: () -> Unit,
+    onTrackClick: (Track) -> Unit,
     viewModel: SearchViewModel = viewModel(factory = Creator.provideSearchViewModelFactory()),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -68,6 +69,7 @@ fun SearchRoute(
         onBack = onBack,
         onSearch = viewModel::search,
         onReset = viewModel::reset,
+        onTrackClick = onTrackClick
     )
 }
 
@@ -78,6 +80,7 @@ fun SearchScreen(
     onBack: () -> Unit,
     onSearch: (String) -> Unit,
     onReset: () -> Unit,
+    onTrackClick: (Track) -> Unit,
 ) {
     var searchQuery by rememberSaveable { mutableStateOf("") }
     val fieldColor = MaterialTheme.colorScheme.surfaceVariant
@@ -230,13 +233,7 @@ fun SearchScreen(
                         items(state.tracks) { track ->
                             TrackRow(
                                 track = track,
-                                onClick = {
-                                    Toast.makeText(
-                                        context,
-                                        context.getString(R.string.track_selected, track.trackName),
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
-                                },
+                                onClick = { onTrackClick(track) },
                             )
                         }
                     }

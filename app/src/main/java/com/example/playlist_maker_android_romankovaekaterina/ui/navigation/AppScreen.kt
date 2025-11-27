@@ -7,5 +7,9 @@ enum class AppScreen(val route: String) {
 
     Favorites( "favorites"),
 
-    Playlists(route = "playlists")
+    Playlists(route = "playlists"),
+
+    NewPlaylist("new_playlist"),
+
+    TrackDetails("track_details")
 }

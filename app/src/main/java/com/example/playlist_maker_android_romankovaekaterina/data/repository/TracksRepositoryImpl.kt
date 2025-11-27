@@ -6,8 +6,13 @@ import com.example.playlist_maker_android_romankovaekaterina.domain.api.NetworkC
 import com.example.playlist_maker_android_romankovaekaterina.domain.api.TracksRepository
 import com.example.playlist_maker_android_romankovaekaterina.domain.models.Track
 import kotlinx.coroutines.delay
+import com.example.playlist_maker_android_romankovaekaterina.data.database.DatabaseMock
+import kotlinx.coroutines.flow.Flow
 
-class TracksRepositoryImpl(private val networkClient: NetworkClient) : TracksRepository {
+class TracksRepositoryImpl(
+    private val networkClient: NetworkClient,
+    private val database: DatabaseMock
+) : TracksRepository {
 
     override suspend fun searchTracks(expression: String): List<Track> {
         val response = networkClient.doRequest(TracksSearchRequest(expression))
@@ -18,10 +23,38 @@ class TracksRepositoryImpl(private val networkClient: NetworkClient) : TracksRep
                 val minutes = totalSeconds / 60
                 val seconds = totalSeconds % 60
                 val formattedTime = "%02d:%02d".format(minutes, seconds)
-                Track(dto.trackName, dto.artistName, formattedTime)
+                Track(
+                    id = (dto.trackName + dto.artistName + formattedTime).hashCode().toLong(),
+                    trackName = dto.trackName,
+                    artistName = dto.artistName,
+                    trackTime = formattedTime
+                )
             }
         } else {
             emptyList()
         }
+    }
+    override fun getTrackByNameAndArtist(track: Track): Flow<Track?> {
+        return database.getTrackByNameAndArtist(track)
+    }
+
+    override fun getFavoriteTracks(): Flow<List<Track>> {
+        return database.getFavoriteTracks()
+    }
+
+    override suspend fun insertTrackToPlaylist(track: Track, playlistId: Long) {
+        database.insertTrack(track.copy(playlistId = playlistId))
+    }
+
+    override suspend fun deleteTrackFromPlaylist(track: Track) {
+        database.insertTrack(track.copy(playlistId = 0))
+    }
+
+    override suspend fun updateTrackFavoriteStatus(track: Track, isFavorite: Boolean) {
+        database.insertTrack(track.copy(favorite = isFavorite))
+    }
+
+    override fun deleteTracksByPlaylistId(playlistId: Long) {
+        database.deleteTracksByPlaylistId(playlistId)
     }
 }

@@ -37,4 +37,17 @@
     <string name="playlists_empty_state_description">Нажмите на кнопку, чтобы добавить первый плейлист</string>
     <string name="playlists_bottom_sheet_title">Новый плейлист</string>
     <string name="playlists_bottom_sheet_message">Закройте панель, нажав вне её области</string>
+
+    <string name="search_icon">Назад к поиску</string>
+    <string name="add_playlist_icon">Создать плейлист</string>
+    <string name="playlist_tracks_count">%1$d треков</string>
+    <string name="playlist_name_hint">Название плейлиста</string>
+    <string name="playlist_description_hint">Описание плейлиста</string>
+    <string name="save_playlist">Сохранить</string>
+    <string name="new_playlist_title">Новый плейлист</string>
+    <string name="add_to_playlist_icon">Добавить в плейлист</string>
+    <string name="add_to_playlist_title">Выберите плейлист</string>
+    <string name="add_to_favorites_icon">Добавить в избранное</string>
+    <string name="track_details_title">Детали трека</string>
+    <string name="track_length">Длительность: %1$s</string>
 </resources>
